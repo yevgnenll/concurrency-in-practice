@@ -8,7 +8,8 @@ class ThreadCounter(
     override fun run() {
         for (num in 1..10) {
             val count: Long = counter.increment()
-            println("Thread-$threadNumber: $count")
+            val get: Long = counter.count
+            println("Thread-$threadNumber: $count, get: $get")
         }
     }
 }
