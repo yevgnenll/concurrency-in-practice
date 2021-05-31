@@ -14,9 +14,11 @@ internal class CounterTest {
         thread1.start()
         thread2.start()
 
+        var i = 0
         while (counter.count < 20) {
             val count = counter.count
-            println("client: $count")
+            i ++
+            println("client: $count, $i")
         }
     }
 

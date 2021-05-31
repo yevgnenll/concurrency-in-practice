@@ -3,7 +3,6 @@ package com.example.concurrent.component
 data class Counter(
     @get:Synchronized
     var count: Long = 0
-
 ) {
     @Synchronized
     fun increment(): Long {
