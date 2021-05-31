@@ -13,6 +13,7 @@ class ImprovedList<T>(
         return false
     }
 
+    @get:Synchronized
     override val size: Int
         get() = list.size
 
