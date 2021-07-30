@@ -45,12 +45,14 @@ public class MutablePeriod {
 
         pEnd.setYear(78);
         System.out.println("변경 1978년 으로 변경");
+        System.out.println(p.end());
         System.out.println(p);
 
         System.out.println("-----------------");
 
         pEnd.setYear(69);
         System.out.println("변경 1969년 으로 변경");
+        System.out.println(p.end());
         System.out.println(p);
     }
 }
