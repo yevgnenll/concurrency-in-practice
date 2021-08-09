@@ -1,6 +1,5 @@
 package me.yevgnenll.concurrent.serializable;
 
-import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -37,10 +36,28 @@ public final class Period implements Serializable {
         return start + " - " + end;
     }
 
-    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-        s.defaultReadObject();
-        if (start.compareTo(end) > 0) {
-            throw new InvalidObjectException(start + "가 " + end + "보다 늦다.");
+    private void readObject(ObjectInputStream stream) throws InvalidObjectException {
+        throw new InvalidObjectException("proxy 가 필요합니다");
+    }
+
+    private Object writeReplace() {
+        return new SerializationProxy(this);
+    }
+
+    private static class SerializationProxy implements Serializable {
+
+        private static final long serialVersionUID = -2785633062946028119L;
+
+        private final Date start;
+        private final Date end;
+
+        SerializationProxy(Period period) {
+            start = period.start;
+            end = period.end;
+        }
+
+        private Object readResolve() {
+            return new Period(start, end);
         }
     }
 }
